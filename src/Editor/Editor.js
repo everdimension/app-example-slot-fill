@@ -8,6 +8,7 @@ export function Editor() {
     <Page renderHeading={() => 'Image Editor'}>
       <div
         style={{
+          height: '100%',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',

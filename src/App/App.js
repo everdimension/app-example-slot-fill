@@ -4,7 +4,6 @@ import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Button } from '@blueprintjs/core';
-import { Switch } from '@blueprintjs/core';
 import { Menu, MenuItem } from '@blueprintjs/core';
 import { Classes } from '@blueprintjs/core';
 import { Colors } from '@blueprintjs/core';
@@ -15,6 +14,7 @@ import { UNIT } from '../styles.js';
 import { Editor } from '../Editor/Editor.js';
 import { Feed } from '../Feed/Feed.js';
 import { Friends } from '../Friends/Friends.js';
+import { Settings } from '../Settings/Settings.js';
 import { Page } from '../Page/Page.js';
 
 console.log(Object.keys(Colors));
@@ -97,17 +97,7 @@ export function App() {
         <Route path="/" exact render={() => <Feed />} />
         <Route path="/editor" render={() => <Editor />} />
         <Route path="/friends" render={() => <Friends />} />
-        <Route
-          path="/settings"
-          render={() => (
-            <Page renderHeading={() => 'Settings'}>
-              <div>
-                <Switch large label="Shortcuts"></Switch>
-                <Switch large label="Something else"></Switch>
-              </div>
-            </Page>
-          )}
-        />
+        <Route path="/settings" render={() => <Settings />} />
         <Keybinding
           combo="cmd+l"
           onKeyDown={() => {
@@ -115,6 +105,25 @@ export function App() {
             setTheme(newTheme);
           }}
         ></Keybinding>
+        <Route
+          render={({ history }) => (
+            <React.Fragment>
+              <Keybinding
+                combo="cmd+e"
+                onKeyDown={() => history.push('/editor')}
+              />
+              <Keybinding
+                combo="cmd+f"
+                onKeyDown={() => history.push('/friends')}
+              />
+              <Keybinding
+                combo="cmd+s"
+                onKeyDown={() => history.push('/settings')}
+              />
+              <Keybinding combo="cmd+h" onKeyDown={() => history.push('/')} />
+            </React.Fragment>
+          )}
+        />
       </div>
     </BrowserRouter>
   );
