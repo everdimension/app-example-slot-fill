@@ -1,10 +1,13 @@
 import React from 'react';
 import { UNIT } from '../styles.js';
 
-export function Letterbox({ factor = 1, ...props }) {
+export function Letterbox({ factor = 1, style, ...props }) {
   return (
     <div
-      style={{ paddingTop: UNIT * factor, paddingBottom: factor * 1 }}
+      style={Object.assign(
+        { paddingTop: UNIT * factor, paddingBottom: factor * 1 },
+        style,
+      )}
       {...props}
     />
   );

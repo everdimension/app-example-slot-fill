@@ -12,7 +12,10 @@ import './App.css';
 import { Logo } from '../Logo/Logo.js';
 import { Keybinding } from '../Hotkeys/Hotkeys.js';
 import { UNIT } from '../styles.js';
-// import { keyMap } from '../Hotkeys/keyMap.js';
+import { Editor } from '../Editor/Editor.js';
+import { Feed } from '../Feed/Feed.js';
+import { Friends } from '../Friends/Friends.js';
+import { Page } from '../Page/Page.js';
 
 console.log(Object.keys(Colors));
 const { useState } = React;
@@ -52,12 +55,30 @@ export function App() {
             render={({ history }) => (
               <ul style={{ padding: 0, listStyle: 'none' }}>
                 <MenuItem
-                  text="The feature page"
-                  icon="build"
+                  text="Feed"
+                  icon="media"
                   href="/"
                   onClick={event => {
                     event.preventDefault();
-                    history.push('/');
+                    history.push(event.currentTarget.pathname);
+                  }}
+                />
+                <MenuItem
+                  text="Editor"
+                  icon="build"
+                  href="/editor"
+                  onClick={event => {
+                    event.preventDefault();
+                    history.push(event.currentTarget.pathname);
+                  }}
+                />
+                <MenuItem
+                  text="Friends"
+                  icon="walk"
+                  href="/friends"
+                  onClick={event => {
+                    event.preventDefault();
+                    history.push(event.currentTarget.pathname);
                   }}
                 />
                 <MenuItem
@@ -66,28 +87,27 @@ export function App() {
                   href="/settings"
                   onClick={event => {
                     event.preventDefault();
-                    history.push('/settings');
+                    history.push(event.currentTarget.pathname);
                   }}
                 />
               </ul>
             )}
           />
         </nav>
-        <div style={{ padding: UNIT * 4 }}>
-          <Route path="/" exact render={() => <Button>hello</Button>} />
-          <Route
-            path="/settings"
-            render={() => (
+        <Route path="/" exact render={() => <Feed />} />
+        <Route path="/editor" render={() => <Editor />} />
+        <Route path="/friends" render={() => <Friends />} />
+        <Route
+          path="/settings"
+          render={() => (
+            <Page renderHeading={() => 'Settings'}>
               <div>
-                <h3>Settings</h3>
-                <div>
-                  <Switch large label="Shortcuts"></Switch>
-                  <Switch large label="Something else"></Switch>
-                </div>
+                <Switch large label="Shortcuts"></Switch>
+                <Switch large label="Something else"></Switch>
               </div>
-            )}
-          />
-        </div>
+            </Page>
+          )}
+        />
         <Keybinding
           combo="cmd+l"
           onKeyDown={() => {
