@@ -9,7 +9,6 @@ export function Settings() {
   return (
     <Page renderHeading={() => 'Settings'}>
       <div>
-        <Spacer />
         <Switch large label="Shortcuts"></Switch>
         <Switch large label="Something else"></Switch>
       </div>
@@ -24,10 +23,10 @@ export function Settings() {
         }}
       >
         <ShortcutSwitch label="Dark / Light Theme" shortcut="cmd+L" />
+        <ShortcutSwitch label="Settings" shortcut="cmd+S" />
         <ShortcutSwitch label="Feed" shortcut="cmd+H" />
         <ShortcutSwitch label="Editor" shortcut="cmd+E" />
-        <ShortcutSwitch label="Friends" shortcut="cmd+F" />
-        <ShortcutSwitch label="Settings" shortcut="cmd+S" />
+        <ShortcutSwitch label="Followers" shortcut="cmd+F" />
       </div>
     </Page>
   );

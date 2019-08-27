@@ -4,6 +4,7 @@ import '@blueprintjs/core/lib/css/blueprint.css';
 import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Button } from '@blueprintjs/core';
+import { Navbar, Alignment } from '@blueprintjs/core';
 import { Menu, MenuItem } from '@blueprintjs/core';
 import { Classes } from '@blueprintjs/core';
 import { Colors } from '@blueprintjs/core';
@@ -13,11 +14,10 @@ import { Keybinding } from '../Hotkeys/Hotkeys.js';
 import { UNIT } from '../styles.js';
 import { Editor } from '../Editor/Editor.js';
 import { Feed } from '../Feed/Feed.js';
-import { Friends } from '../Friends/Friends.js';
+import { Followers } from '../Followers/Followers.js';
 import { Settings } from '../Settings/Settings.js';
 import { Page } from '../Page/Page.js';
 
-console.log(Object.keys(Colors));
 const { useState } = React;
 
 export function App() {
@@ -29,11 +29,21 @@ export function App() {
         style={{
           display: 'grid',
           gridTemplateColumns: '300px auto',
+          gridTemplateRows: 'min-content auto',
           minHeight: '100vh',
           backgroundColor:
             theme === Classes.DARK ? Colors.DARK_GRAY4 : Colors.WHITE,
         }}
       >
+        <div style={{ gridColumn: '1 / -1' }}>
+          <Navbar>
+            <Navbar.Group align={Alignment.LEFT}>
+              <Navbar.Heading>UI Labs</Navbar.Heading>
+              <Navbar.Divider />
+              <Button>hehe</Button>
+            </Navbar.Group>
+          </Navbar>
+        </div>
         <nav
           style={{
             padding: UNIT * 4,
@@ -41,19 +51,9 @@ export function App() {
               theme === Classes.DARK ? Colors.DARK_GRAY5 : Colors.LIGHT_GRAY5,
           }}
         >
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'min-content auto',
-              gridGap: 10,
-              alignItems: 'center',
-            }}
-          >
-            <Logo /> <span style={{ fontSize: 20 }}>UI Labs</span>
-          </div>
           <Route
             render={({ history }) => (
-              <ul style={{ padding: 0, listStyle: 'none' }}>
+              <ul style={{ padding: 0, margin: 0, listStyle: 'none' }}>
                 <MenuItem
                   text="Feed"
                   icon="media"
@@ -73,9 +73,9 @@ export function App() {
                   }}
                 />
                 <MenuItem
-                  text="Friends"
+                  text="Followers"
                   icon="walk"
-                  href="/friends"
+                  href="/Followers"
                   onClick={event => {
                     event.preventDefault();
                     history.push(event.currentTarget.pathname);
@@ -96,7 +96,7 @@ export function App() {
         </nav>
         <Route path="/" exact render={() => <Feed />} />
         <Route path="/editor" render={() => <Editor />} />
-        <Route path="/friends" render={() => <Friends />} />
+        <Route path="/Followers" render={() => <Followers />} />
         <Route path="/settings" render={() => <Settings />} />
         <Keybinding
           combo="cmd+l"
@@ -114,7 +114,7 @@ export function App() {
               />
               <Keybinding
                 combo="cmd+f"
-                onKeyDown={() => history.push('/friends')}
+                onKeyDown={() => history.push('/Followers')}
               />
               <Keybinding
                 combo="cmd+s"
