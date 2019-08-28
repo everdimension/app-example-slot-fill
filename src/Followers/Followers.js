@@ -6,9 +6,9 @@ export function Followers() {
   return (
     <Page renderHeading={() => 'Followers'}>
       <div style={{ display: 'grid', gridGap: 10 }}>
-        <User></User>
-        <User></User>
-        <User></User>
+        <User />
+        <User />
+        <User />
       </div>
     </Page>
   );

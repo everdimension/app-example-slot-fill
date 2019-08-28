@@ -10,8 +10,8 @@ export function Settings() {
   return (
     <Page renderHeading={() => 'Settings'}>
       <div>
-        <Switch large label="Shortcuts"></Switch>
-        <Switch large label="Something else"></Switch>
+        <Switch large label="Shortcuts" />
+        <Switch large label="Something else" />
       </div>
       <Spacer />
       <H2>Keyboard Shortcuts</H2>

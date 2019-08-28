@@ -5,19 +5,16 @@ import { SlotFillProvider, Slot } from '@wordpress/components';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { Button } from '@blueprintjs/core';
 import { Navbar, Alignment } from '@blueprintjs/core';
-import { Menu, MenuItem } from '@blueprintjs/core';
 import { Classes } from '@blueprintjs/core';
 import { Colors } from '@blueprintjs/core';
 import './App.css';
-import { Logo } from '../Logo/Logo.js';
 import { Keybinding } from '../Hotkeys/Hotkeys.js';
-import { UNIT } from '../styles.js';
 import { Editor } from '../Editor/Editor.js';
 import { Feed } from '../Feed/Feed.js';
 import { Followers } from '../Followers/Followers.js';
 import { Settings } from '../Settings/Settings.js';
+import { Sidenav } from '../Sidenav/Sidenav.js';
 import { MessagesPlugin } from '../Messages/MessagesPlugin.js';
-import { Page } from '../Page/Page.js';
 
 const { useState } = React;
 
@@ -46,57 +43,7 @@ export function App() {
               </Navbar.Group>
             </Navbar>
           </div>
-          <nav
-            style={{
-              padding: UNIT * 4,
-              backgroundColor:
-                theme === Classes.DARK ? Colors.DARK_GRAY5 : Colors.LIGHT_GRAY5,
-            }}
-          >
-            <Route
-              render={({ history }) => (
-                <ul style={{ padding: 0, margin: 0, listStyle: 'none' }}>
-                  <MenuItem
-                    text="Feed"
-                    icon="media"
-                    href="/"
-                    onClick={event => {
-                      event.preventDefault();
-                      history.push(event.currentTarget.pathname);
-                    }}
-                  />
-                  <MenuItem
-                    text="Editor"
-                    icon="build"
-                    href="/editor"
-                    onClick={event => {
-                      event.preventDefault();
-                      history.push(event.currentTarget.pathname);
-                    }}
-                  />
-                  <MenuItem
-                    text="Followers"
-                    icon="walk"
-                    href="/Followers"
-                    onClick={event => {
-                      event.preventDefault();
-                      history.push(event.currentTarget.pathname);
-                    }}
-                  />
-                  <MenuItem
-                    text="Settings"
-                    icon="cog"
-                    href="/settings"
-                    onClick={event => {
-                      event.preventDefault();
-                      history.push(event.currentTarget.pathname);
-                    }}
-                  />
-                  <Slot name="navigation" />
-                </ul>
-              )}
-            />
-          </nav>
+          <Sidenav theme={theme} />
           <Route path="/" exact render={() => <Feed />} />
           <Route path="/editor" render={() => <Editor />} />
           <Route path="/Followers" render={() => <Followers />} />
@@ -108,10 +55,10 @@ export function App() {
               const newTheme = theme === Classes.DARK ? '' : Classes.DARK;
               setTheme(newTheme);
             }}
-          ></Keybinding>
+          />
           <Route
             render={({ history }) => (
-              <React.Fragment>
+              <>
                 <Keybinding
                   combo="ctrl+e"
                   onKeyDown={() => history.push('/editor')}
@@ -124,8 +71,11 @@ export function App() {
                   combo="ctrl+s"
                   onKeyDown={() => history.push('/settings')}
                 />
-                <Keybinding combo="ctrl+h" onKeyDown={() => history.push('/')} />
-              </React.Fragment>
+                <Keybinding
+                  combo="ctrl+h"
+                  onKeyDown={() => history.push('/')}
+                />
+              </>
             )}
           />
           <Slot name="keybindings" />

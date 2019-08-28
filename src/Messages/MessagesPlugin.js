@@ -1,14 +1,14 @@
 import React from 'react';
 import { Fill } from '@wordpress/components';
 import { MenuItem } from '@blueprintjs/core';
-import { Route } from 'react-router';
+import { Route } from 'react-router-dom';
 import { Messages } from './Messages.js';
 import { Keybinding } from '../Hotkeys/Hotkeys.js';
 import { ShortcutSwitch } from '../Settings/ShortcutSwitch/ShortcutSwitch.js';
 
 export function MessagesPlugin() {
   return (
-    <React.Fragment>
+    <>
       <Fill name="navigation">
         <Route
           render={({ history }) => (
@@ -40,6 +40,6 @@ export function MessagesPlugin() {
           )}
         />
       </Fill>
-    </React.Fragment>
+    </>
   );
 }

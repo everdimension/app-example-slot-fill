@@ -28,7 +28,7 @@ export function Feed() {
               backgroundSize: 'cover',
               border: '4px solid white',
             }}
-          ></div>
+          />
         ))}
       </div>
     </Page>

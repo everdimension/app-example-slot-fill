@@ -25,7 +25,7 @@ export function Editor() {
           >
             <img
               src={require('../assets/goat.jpeg')}
-              alt="Image of a goat. The image should be edited."
+              alt="A goat. Apply filters."
               style={{ width: '100%' }}
             />
           </div>

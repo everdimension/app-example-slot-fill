@@ -2,23 +2,6 @@ import React from 'react';
 import isHotKey from 'is-hotkey';
 
 const { useEffect } = React;
-// registerKeybinding('SOMETHING', 'shift+l');
-// registerKeybinding('two', 'r');
-// export function Shortcuts({ bindings }) {
-//   console.log('render shortcuts');
-//   return (
-//     <HotKeys
-//       handlers={{
-//         SOMETHING: () => {
-//           console.log('CONSOLE!');
-//         },
-//         two: () => {
-//           console.log('CONSOLE!');
-//         },
-//       }}
-//     >ar eyou fucking kidding me</HotKeys>
-//   );
-// }
 
 export function Keybinding({ combo, onKeyDown }) {
   const handler = React.useRef();
