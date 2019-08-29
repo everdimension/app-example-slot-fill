@@ -2,19 +2,15 @@ import React from 'react';
 import 'normalize.css';
 import '@blueprintjs/core/lib/css/blueprint.css';
 import { SlotFillProvider, Slot } from '@wordpress/components';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { Button } from '@blueprintjs/core';
-import { Navbar, Alignment } from '@blueprintjs/core';
+import { BrowserRouter } from 'react-router-dom';
 import { Classes } from '@blueprintjs/core';
-import { Colors } from '@blueprintjs/core';
 import './App.css';
-import { Keybinding } from '../Hotkeys/Hotkeys.js';
-import { Editor } from '../Editor/Editor.js';
-import { Feed } from '../Feed/Feed.js';
-import { Followers } from '../Followers/Followers.js';
-import { Settings } from '../Settings/Settings.js';
 import { Sidenav } from '../Sidenav/Sidenav.js';
 import { MessagesPlugin } from '../Messages/MessagesPlugin.js';
+import { Layout } from './Layout/Layout.js';
+import { NavigationBar } from './NavigationBar/NavigationBar.js';
+import { CurrentView } from './CurrentView/CurrentView.js';
+import { Keybindings } from './Keybindings/Keybindings.js';
 
 const { useState } = React;
 
@@ -23,63 +19,19 @@ export function App() {
   return (
     <SlotFillProvider>
       <BrowserRouter>
-        <div
-          className={theme}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '300px auto',
-            gridTemplateRows: 'min-content auto',
-            minHeight: '100vh',
-            backgroundColor:
-              theme === Classes.DARK ? Colors.DARK_GRAY4 : Colors.WHITE,
-          }}
-        >
+        <Layout theme={theme}>
           <div style={{ gridColumn: '1 / -1' }}>
-            <Navbar>
-              <Navbar.Group align={Alignment.LEFT}>
-                <Navbar.Heading>UI Labs</Navbar.Heading>
-                <Navbar.Divider />
-                <Button>hehe</Button>
-              </Navbar.Group>
-            </Navbar>
+            <NavigationBar />
           </div>
+
           <Sidenav theme={theme} />
-          <Route path="/" exact render={() => <Feed />} />
-          <Route path="/editor" render={() => <Editor />} />
-          <Route path="/Followers" render={() => <Followers />} />
-          <Route path="/settings" render={() => <Settings />} />
-          <Slot name="pageContent" />
-          <Keybinding
-            combo="ctrl+l"
-            onKeyDown={() => {
-              const newTheme = theme === Classes.DARK ? '' : Classes.DARK;
-              setTheme(newTheme);
-            }}
-          />
-          <Route
-            render={({ history }) => (
-              <>
-                <Keybinding
-                  combo="ctrl+e"
-                  onKeyDown={() => history.push('/editor')}
-                />
-                <Keybinding
-                  combo="ctrl+f"
-                  onKeyDown={() => history.push('/Followers')}
-                />
-                <Keybinding
-                  combo="ctrl+s"
-                  onKeyDown={() => history.push('/settings')}
-                />
-                <Keybinding
-                  combo="ctrl+h"
-                  onKeyDown={() => history.push('/')}
-                />
-              </>
-            )}
-          />
-          <Slot name="keybindings" />
-        </div>
+
+          <CurrentView />
+
+          <Slot name="currentView" />
+        </Layout>
+        <Keybindings theme={theme} onSetTheme={setTheme} />
+        <Slot name="keybindings" />
         <MessagesPlugin />
       </BrowserRouter>
     </SlotFillProvider>

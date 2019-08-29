@@ -3,16 +3,21 @@ import PropTypes from 'prop-types';
 import { Switch } from '@blueprintjs/core';
 import { Tag } from '@blueprintjs/core';
 
-const propTypes = {
-  shortcut: PropTypes.string,
-  label: PropTypes.string,
-};
-
-export function ShortcutSwitch({ shortcut, label }) {
+export function ShortcutSwitch({
+  shortcut,
+  label,
+  defaultChecked = true,
+  onChange = () => {},
+}) {
   const [key1, key2] = shortcut.split('+');
   return (
     <>
-      <Switch defaultChecked large label={label} />
+      <Switch
+        large
+        label={label}
+        defaultChecked={defaultChecked}
+        onChange={onChange}
+      />
       <span>
         <Tag large minimal>
           {key1}
@@ -26,4 +31,9 @@ export function ShortcutSwitch({ shortcut, label }) {
   );
 }
 
-ShortcutSwitch.propTypes = propTypes;
+ShortcutSwitch.propTypes = {
+  shortcut: PropTypes.string,
+  label: PropTypes.string,
+  defaultChecked: PropTypes.bool,
+  onChange: PropTypes.func,
+};

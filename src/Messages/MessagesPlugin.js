@@ -6,7 +6,10 @@ import { Messages } from './Messages.js';
 import { Keybinding } from '../Hotkeys/Hotkeys.js';
 import { ShortcutSwitch } from '../Settings/ShortcutSwitch/ShortcutSwitch.js';
 
+const { useState } = React;
+
 export function MessagesPlugin() {
+  const [shortcutEnabled, setShortcutEnabled] = useState(true);
   return (
     <>
       <Fill name="navigation">
@@ -24,20 +27,29 @@ export function MessagesPlugin() {
           )}
         />
       </Fill>
-      <Fill name="pageContent">
+      <Fill name="currentView">
         <Route path="/messages" render={() => <Messages />} />
       </Fill>
       <Fill name="settings">
-        <ShortcutSwitch label="Messages" shortcut="ctrl+M" />
+        <ShortcutSwitch
+          defaultChecked={shortcutEnabled}
+          onChange={event => {
+            setShortcutEnabled(event.target.checked);
+          }}
+          label="Messages"
+          shortcut="ctrl+M"
+        />
       </Fill>
       <Fill name="keybindings">
         <Route
-          render={({ history }) => (
-            <Keybinding
-              combo="ctrl+m"
-              onKeyDown={() => history.push('/messages')}
-            />
-          )}
+          render={({ history }) => {
+            return shortcutEnabled ? (
+              <Keybinding
+                combo="ctrl+m"
+                onKeyDown={() => history.push('/messages')}
+              />
+            ) : null;
+          }}
         />
       </Fill>
     </>
