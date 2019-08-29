@@ -10,7 +10,7 @@ const propTypes = {
 export function Pillarbox({ factor = 1, style, ...props }) {
   return (
     <div
-      style={{ paddingLeft: UNIT * factor, paddingRight: factor * 1, ...style }}
+      style={{ paddingLeft: UNIT * factor, paddingRight: UNIT * factor, ...style }}
       {...props}
     />
   );
