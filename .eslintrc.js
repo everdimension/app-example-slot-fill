@@ -14,6 +14,7 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/forbid-prop-types': 'off',
     'react/jsx-props-no-spreading': ['error', { html: 'ignore' }],
+    'react/jsx-wrap-multilines': 'off', // handled by prettier
     'global-require': 'off',
   },
 };

@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export function User() {
-  const imageSize = 64;
+export function User({ imageSize = 64, name = 'User name' }) {
   return (
     <div
       style={{
@@ -20,7 +20,12 @@ export function User() {
           borderRadius: '50%',
         }}
       />
-      <span>User name</span>
+      <span>{name}</span>
     </div>
   );
 }
+
+User.propTypes = {
+  imageSize: PropTypes.number,
+  name: PropTypes.number,
+};
