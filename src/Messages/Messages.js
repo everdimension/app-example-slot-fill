@@ -32,7 +32,7 @@ Message.propTypes = {
 };
 
 export function Messages() {
-  const [messages, setMessages] = useState([
+  const [messages] = useState([
     {
       id: createId(),
       text:

@@ -7,10 +7,7 @@ import { Messages } from './Messages.js';
 import { Keybinding } from '../Hotkeys/Hotkeys.js';
 import { ShortcutSwitch } from '../Settings/ShortcutSwitch/ShortcutSwitch.js';
 
-const { useState } = React;
-
 export function MessagesFeature() {
-  const [shortcutEnabled, setShortcutEnabled] = useState(true);
   return (
     <>
       <Fill name="navigation">
@@ -33,9 +30,9 @@ export function MessagesFeature() {
       </Fill>
       <Fill name="settings">
         <ShortcutSwitch
-          defaultChecked={shortcutEnabled}
+          defaultChecked
           onChange={event => {
-            setShortcutEnabled(event.target.checked);
+            console.log('switch toggled', event); // eslint-disable-line
           }}
           label="Messages"
           shortcut="ctrl+M"
@@ -44,12 +41,12 @@ export function MessagesFeature() {
       <Fill name="keybindings">
         <Route
           render={({ history }) => {
-            return shortcutEnabled ? (
+            return (
               <Keybinding
                 combo="ctrl+m"
                 onKeyDown={() => history.push('/messages')}
               />
-            ) : null;
+            );
           }}
         />
       </Fill>
