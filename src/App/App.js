@@ -10,6 +10,7 @@ import { Layout } from './Layout/Layout.js';
 import { NavigationBar } from './NavigationBar/NavigationBar.js';
 import { CurrentView } from './CurrentView/CurrentView.js';
 import { Keybindings } from './Keybindings/Keybindings.js';
+import { MessagesFeature } from '../Messages/MessagesFeature.js';
 
 const { useState } = React;
 
@@ -18,6 +19,7 @@ export function App() {
   return (
     <SlotFillProvider>
       <BrowserRouter>
+        <MessagesFeature />
         <Layout theme={theme}>
           <div style={{ gridColumn: '1 / -1' }}>
             <NavigationBar />
