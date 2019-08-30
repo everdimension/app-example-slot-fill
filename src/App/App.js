@@ -6,7 +6,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Classes } from '@blueprintjs/core';
 import './App.css';
 import { Sidenav } from '../Sidenav/Sidenav.js';
-import { MessagesFeature } from '../Messages/MessagesFeature.js';
 import { Layout } from './Layout/Layout.js';
 import { NavigationBar } from './NavigationBar/NavigationBar.js';
 import { CurrentView } from './CurrentView/CurrentView.js';
@@ -32,7 +31,6 @@ export function App() {
         </Layout>
         <Keybindings theme={theme} onSetTheme={setTheme} />
         <Slot name="keybindings" />
-        <MessagesFeature />
       </BrowserRouter>
     </SlotFillProvider>
   );
